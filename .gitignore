@@ -45,6 +45,22 @@ output/
 *.json.bak
 *.log
 
+# Ingestion data files (keep directory structure and READMEs)
+ingestion/ai-exports/*.json
+ingestion/ai-exports/**/
+!ingestion/ai-exports/README.md
+ingestion/archives/*.txt
+ingestion/archives/**/
+!ingestion/archives/README.md
+!ingestion/archives/.gitkeep
+ingestion/bookmarks/*.html
+ingestion/bookmarks/**/
+!ingestion/bookmarks/README.md
+ingestion/browser-tabs/*.txt
+ingestion/browser-tabs/*.json
+ingestion/browser-tabs/**/
+!ingestion/browser-tabs/README.md
+
 # Credentials
 .env
 config.local.yaml
