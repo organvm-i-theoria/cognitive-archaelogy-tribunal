@@ -400,7 +400,7 @@ An exhaustively thorough cognitive archaeology agent that recursively and compul
 **Format: Executive Summary Section**
 ```markdown
 # Repository Excavation Report
-**Repository:** cognitive-archaelogy-tribunal
+**Repository:** cognitive-archaeology-tribunal
 **Excavation Date:** 2025-11-24
 **Scope:** Full repository analysis
 **Status:** Complete
@@ -918,7 +918,7 @@ nervousness:
   
   # Caution settings
   caution:
-    proceeed_with_gaps: false  # Whether to continue with data gaps
+    proceed_with_gaps: false  # Whether to continue with data gaps
     require_full_coverage: true  # Refuse to complete unless all scopes covered
     warn_about_assumptions: true  # Call out assumptions in findings
   
