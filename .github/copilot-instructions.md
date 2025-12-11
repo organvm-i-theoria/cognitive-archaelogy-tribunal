@@ -3,46 +3,96 @@ description: AI rules derived by SpecStory from the project AI interaction histo
 globs: *
 ---
 
+---
+description: AI rules derived by SpecStory from the project AI interaction history
+---
+
 ## HEADERS
-
-This file defines all project rules, coding standards, workflow guidelines, references, documentation structures, and best practices for the AI coding assistant. It is a living document, evolving with project needs and decisions.
-
-## TECH STACK
-
-*   Python 3.14.0 (as configured via Trunk)
 
 ## PROJECT DOCUMENTATION & CONTEXT SYSTEM
 
-*   REPO_CLEANUP_PLAN.md
+## TECH STACK
 
 ## CODING STANDARDS
 
-*   **Markdown Linting:** Fenced code blocks should always have a language specified for syntax highlighting, accessibility, documentation quality, and CI/CD compliance. Use appropriate language identifiers like `bash`, `python`, `json`, `yaml`, `text`, or `markdown`. For directory structures, use `text`, `bash`, or `plaintext`.
-*   **Python Imports:** Remove unused imports to keep code clean, improve performance, adhere to linting standards (PEP 8, flake8, pylint), and ease maintenance.
-*   **Dot files/folders:** All config dot files/folders (`.venv`, `.trunk`, `.vscode`, `.github`, `.specstory`, `.history`) should be gitignored.
+### MARKDOWN
 
-## DEBUGGING
+*   **MD040/fenced-code-language**: Fenced code blocks should have a language specified
 
-*   **Markdown Linting:** When addressing markdown linting issues:
-    *   Prioritize fixing missing code block languages.
-    *   Address multiple blank lines.
-    *   Correct spacing issues (lists, code blocks, list markers).
-    *   Resolve heading issues (blank lines, duplicate content, top-level heading).
-    *   Convert hard tabs to spaces.
-*   **GitLens Launchpad:** If encountering issues, check GitHub authentication, pull request data, and extension settings. Try signing in to GitHub through GitLens, enabling the GitLens extension, or refreshing the connection.
-*   **Local History Extension:** Local History should be disabled or configured with:
-    *   Disabled
-    *   0 days limit (no retention)
-    *   0 save delay (no auto-save)
-    *   Path to `` if it does activate
-    If `` still regenerates, uninstall the extension entirely. Ensure `"local-history.enabled"` is set to `0` in VS Code settings to disable the extension.
+*   For directory structures, use `text`, `bash`, or `plaintext`.
+*   Common language identifiers for documentation:
+*   `bash` or `shell` - shell commands, file trees
+*   `python` - Python code
+*   `json` - JSON data
+*   `yaml` - YAML configuration
+*   `text` or `plaintext` - unformatted text
+*   `markdown` - nested markdown examples
+
+### PYTHON
+
+*   Unused imports should be removed.
 
 ## WORKFLOW & RELEASE RULES
 
-## VS CODE SETTINGS
+## DEBUGGING
 
-*   **files.exclude:** Use `files.exclude` in `settings.json` to hide configuration folders from view in the workspace explorer.
+## INFRASTRUCTURE
+
+## SECURITY
+
+## CODE REVIEW GUIDELINES
 
 ## GIT RULES
 
-*   All configuration dot files/folders (`.venv`, `.trunk`, `.vscode`, `.github`, `.specstory`, `.history`) should be gitignored.
+*   All config dot files/folders (`.venv`, `.trunk`, `.vscode`, `.github`, `.specstory`, `.history`) should be gitignored.
+*   **.gitignore**: Add `.history` to keep it out of version control (it's local file history).
+*   **.gitignore**: Keep `.trunk` ignored (already covered by trunk-specific patterns, but should be explicit).
+*   Configuration folders (`.vscode`, `.trunk`, `.venv`, `.github`, `.specstory`, `.history`) must stay at the workspace root where tools expect them. Attempts to consolidate them into a single directory will break their expected paths. A viable workaround is to:
+1.  Keep folders in root
+2.  Use VS Code settings to hide them from view
+3.  Let tools regenerate what they need at root (but gitignore them)
+*   Don't format or debug gitignored dot files/folders. They're gitignored, tools auto-generate them as needed, and they're hidden from view via VS Code settings. Just let them exist and regenerate naturally.
+
+## VS CODE SETTINGS
+
+*   To restore a hidden folder in VS Code:
+
+1.  Using Command Palette (⇧⌘P)
+*   Press `Cmd+Shift+P`
+*   Type "Files: Exclude"
+*   Select "Preferences: Open User Settings"
+*   Search for `files.exclude`
+*   Remove or uncheck the pattern for the folder you want to restore
+2.  Using Settings UI
+*   `Cmd+,` to open Settings
+*   Search for "files exclude"
+*   Look for the hidden folder pattern (e.g., `**/.venv` or `**/node_modules`)
+*   Click the X to remove it
+3.  Using Workspace Settings
+*   If the folder is hidden at workspace level:
+*   Open `settings.json` in your project
+*   Look for `files.exclude` configuration
+*   Remove the folder pattern
+4.  Show All Files Temporarily
+*   In the Explorer sidebar, click the "..." menu
+*   Look for filter options or "Show Excluded Files"
+*   Folders typically hidden by default:
+
+*   `.venv` or `venv/` (Python virtual environments)
+*   `node_modules/` (Node.js dependencies)
+*   `.git/` (Git repository)
+*   `__pycache__/`
+*   `.pytest_cache/`
+*   `.trunk/` (Trunk configuration)
+*   `.history/` (Local History extension)
+*   To hide folders from view in VS Code:
+
+1.  Keep folders in root
+2.  Use VS Code settings to hide them from view
+3.  Let tools regenerate what they need at root (but gitignore them)
+*   Local History Configuration:
+    *   `local-history.enabled` must be a number. Use `0` to disable the extension.
+    *   Set to Disabled
+    *   Set to 0 days limit (no retention)
+    *   Set to 0 save delay (no auto-save)
+    *   Path to `` if it does activate
