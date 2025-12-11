@@ -3,54 +3,118 @@ description: AI rules derived by SpecStory from the project AI interaction histo
 globs: *
 ---
 
----
-description: AI rules derived by SpecStory from the project AI interaction history
----
-
-# Copilot Instructions for Cognitive Archaeology Tribunal
-
 ## HEADERS
+
+## PROJECT RULES
+
+### General Guidelines
+- Follow the principle of least astonishment.
+- Write code that is easy to understand and maintain.
+- Ensure code is well-documented.
+
+### Code Style
+- Adhere to PEP 8 style guidelines for Python.
+- Use clear and descriptive names for variables, functions, and classes.
+- Keep functions short and focused.
+
+### Markdown Linting
+- Fenced code blocks should always have a language specified for syntax highlighting and accessibility. Use `text`, `bash`, or `plaintext` for directory structures.
+- Reduce multiple consecutive blank lines to one.
+- Ensure lists are surrounded by blank lines.
+- Ensure fenced code blocks are surrounded by blank lines.
+- Ensure correct spacing after list markers.
+- Ensure headings are surrounded by blank lines.
+- Avoid multiple headings with the same content.
+- The first line should be a top-level heading.
+- Use spaces instead of hard tabs.
 
 ## TECH STACK
 
-- Python 3.14.0
+### Core Languages
+- Python (version 3.14.0)
+
+### Libraries
+- argparse
+- pathlib
+- setuptools
+
+### Tools
 - Trunk
+- VS Code
 
 ## PROJECT DOCUMENTATION & CONTEXT SYSTEM
 
-## CODING STANDARDS
+### Documentation Guidelines
+- All code must be documented with docstrings.
+- Use Markdown for all documentation files.
+- Diagrams and visual aids should be included where appropriate.
 
-- When creating fenced code blocks in Markdown, always specify a language for syntax highlighting and accessibility. Use identifiers like `text`, `bash`, or `plaintext` for directory structures, `python` for Python code, `json` for JSON data, `yaml` for YAML configuration, and `markdown` for nested Markdown examples.
-- Avoid multiple top-level H1 headings in Markdown documents (MD025). Convert subsequent H1 headings to H2 or lower levels as appropriate.
-- Ensure headings within a Markdown document have unique content (MD024). Modify duplicate headings to be distinct.
+### File Structure
+- Configuration files should reside in the root directory.
+- Automatically generated configuration files (e.g., `.venv`, `.trunk`, `.vscode`, `.history`, `.github`, `.specstory`) should reside in the root directory.
+- All config dot files/folders (`.venv`, `.trunk`, `.vscode`, `.history`, `.github`, `.specstory`) should be gitignored.
 
 ## WORKFLOW & RELEASE RULES
 
-- When conversation preservation is required, follow the "Preservation Execution Checklist" in the cognitive-os-master-plan repository. This includes: exporting conversation via chatgpt-exporter, uploading the JSON to cognitive-os-master-plan/planning-conversations/, creating required GitHub issues for each planned repo, posting the architecture discussion to ivi374forivi/.github discussions, linking the master plan from all planned repos, and updating the main README. Mark statuses to track completion.
-- If AI conversation exports are required for a task, and the exports are incomplete or missing, prioritize obtaining fresh exports before proceeding. Follow these steps:
-    - **ChatGPT Export:**
-        ```bash
-        # 1. Go to https://chat.openai.com/
-        # 2. Settings → Data Controls → Export Data
-        # 3. Wait 24-48 hours for email
-        # 4. Download and extract to a known location
-        ```
-    - **Claude Export:**
-        ```bash
-        # 1. Go to https://claude.ai/settings
-        # 2. Look for data export option
-        # 3. Alternative: Use chatgpt-exporter tool from your personal repos
-        ```
-    - **Gemini Export:**
-        ```bash
-        # 1. Go to Google Takeout: https://takeout.google.com/
-        # 2. Select only "Gemini Apps Activity"
-        # 3. Download when ready
-        ```
-    - While waiting for AI exports, proceed with tasks that do not depend on them. For example, Tier 1 fork integrations as outlined in `INTEGRATION_QUEUE.md`.
+### Version Control
+- Use Git for version control.
+- Follow the branching strategy.
+- All changes must be reviewed before merging.
+
+### Branching Strategy
+- Use feature branches for new development.
+- Merge feature branches into the develop branch.
+- Tag releases with version numbers.
+
+### Commit Messages
+- Write clear and concise commit messages.
+- Use imperative mood in commit messages.
 
 ## DEBUGGING
 
-- When debugging GitLens Launchpad, check GitHub authentication, pull request data, and extension settings.
-- When debugging the Local History extension, and if problems persist, uninstall the extension entirely. If the extension is enabled, set the limit to 0 days, the save delay to 0, and the path to empty.
-- Do not format or debug configuration dot files/folders (`.venv` and other hidden config directories).
+### General Debugging
+- Use logging for debugging.
+- Use a debugger to step through code.
+- Write unit tests to catch errors early.
+
+### VS Code
+- To restore a hidden folder in VS Code:
+  1. Using Command Palette (⇧⌘P): Press `Cmd+Shift+P`, type "Files: Exclude", select "Preferences: Open User Settings", search for `files.exclude`, and remove or uncheck the pattern for the folder.
+  2. Using Settings UI: `Cmd+,` to open Settings, search for "files exclude", look for the hidden folder pattern, and click the X to remove it.
+  3. Using Workspace Settings: Open `settings.json` in your project, look for `files.exclude` configuration, and remove the folder pattern.
+  4. Show All Files Temporarily: In the Explorer sidebar, click the "..." menu and look for filter options or "Show Excluded Files".
+
+### GitLens Launchpad
+- Common GitLens Launchpad issues and solutions:
+  1. Sign in to GitHub through GitLens: Open Command Palette (⇧⌘P), type "GitLens: Sign in to GitLens+", and authenticate with GitHub.
+  2. Check GitLens is enabled: Open Command Palette (⇧⌘P), type "GitLens: Show Launchpad", and if it doesn't appear, enable GitLens extension.
+  3. Refresh connection: Open Command Palette (⇧⌘P), type "GitLens: Reset Stored AI Key", and re-authenticate.
+  4. Check for pull requests/issues: Launchpad shows your assigned PRs, reviews, and issues. If you have none, the Launchpad may appear empty.
+
+### Local History Extension
+- Local History should be disabled. If it's still generating `` folders:
+  1. Uninstall the extension: Open Extensions (⇧⌘X), search "Local History", and click "Uninstall".
+  2. Configure it properly:
+     - Disabled
+     - 0 days limit (no retention)
+     - 0 save delay (no auto-save)
+     - Path to `` if it does activate
+- If `` still regenerates, uninstall the extension entirely.
+
+## CODING TOOLS
+
+### Linters
+- Trunk
+- markdownlint
+- black
+- ruff
+- bandit
+- isort
+
+### VS Code Extensions
+- GitLens
+- markdownlint
+
+## BEST PRACTICES
+
+- All config dot files/folders (`.venv`, `.trunk`, `.vscode`, `.history`, `.github`, `.specstory`) should be gitignored, tools auto-generate them as needed, and they're hidden from view via VS Code settings. Just let them exist and regenerate naturally.
