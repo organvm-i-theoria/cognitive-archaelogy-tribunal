@@ -3,96 +3,118 @@ description: AI rules derived by SpecStory from the project AI interaction histo
 globs: *
 ---
 
----
-description: AI rules derived by SpecStory from the project AI interaction history
----
-
 ## HEADERS
 
-## PROJECT DOCUMENTATION & CONTEXT SYSTEM
+## PROJECT RULES
+
+### General Guidelines
+- Follow the principle of least astonishment.
+- Write code that is easy to understand and maintain.
+- Ensure code is well-documented.
+
+### Code Style
+- Adhere to PEP 8 style guidelines for Python.
+- Use clear and descriptive names for variables, functions, and classes.
+- Keep functions short and focused.
+
+### Markdown Linting
+- Fenced code blocks should always have a language specified for syntax highlighting and accessibility. Use `text`, `bash`, or `plaintext` for directory structures.
+- Reduce multiple consecutive blank lines to one.
+- Ensure lists are surrounded by blank lines.
+- Ensure fenced code blocks are surrounded by blank lines.
+- Ensure correct spacing after list markers.
+- Ensure headings are surrounded by blank lines.
+- Avoid multiple headings with the same content.
+- The first line should be a top-level heading.
+- Use spaces instead of hard tabs.
 
 ## TECH STACK
 
-## CODING STANDARDS
+### Core Languages
+- Python (version 3.14.0)
 
-### MARKDOWN
+### Libraries
+- argparse
+- pathlib
+- setuptools
 
-*   **MD040/fenced-code-language**: Fenced code blocks should have a language specified
+### Tools
+- Trunk
+- VS Code
 
-*   For directory structures, use `text`, `bash`, or `plaintext`.
-*   Common language identifiers for documentation:
-*   `bash` or `shell` - shell commands, file trees
-*   `python` - Python code
-*   `json` - JSON data
-*   `yaml` - YAML configuration
-*   `text` or `plaintext` - unformatted text
-*   `markdown` - nested markdown examples
+## PROJECT DOCUMENTATION & CONTEXT SYSTEM
 
-### PYTHON
+### Documentation Guidelines
+- All code must be documented with docstrings.
+- Use Markdown for all documentation files.
+- Diagrams and visual aids should be included where appropriate.
 
-*   Unused imports should be removed.
+### File Structure
+- Configuration files should reside in the root directory.
+- Automatically generated configuration files (e.g., `.venv`, `.trunk`, `.vscode`, `.history`, `.github`, `.specstory`) should reside in the root directory.
+- All config dot files/folders (`.venv`, `.trunk`, `.vscode`, `.history`, `.github`, `.specstory`) should be gitignored.
 
 ## WORKFLOW & RELEASE RULES
 
+### Version Control
+- Use Git for version control.
+- Follow the branching strategy.
+- All changes must be reviewed before merging.
+
+### Branching Strategy
+- Use feature branches for new development.
+- Merge feature branches into the develop branch.
+- Tag releases with version numbers.
+
+### Commit Messages
+- Write clear and concise commit messages.
+- Use imperative mood in commit messages.
+
 ## DEBUGGING
 
-## INFRASTRUCTURE
+### General Debugging
+- Use logging for debugging.
+- Use a debugger to step through code.
+- Write unit tests to catch errors early.
 
-## SECURITY
+### VS Code
+- To restore a hidden folder in VS Code:
+  1. Using Command Palette (⇧⌘P): Press `Cmd+Shift+P`, type "Files: Exclude", select "Preferences: Open User Settings", search for `files.exclude`, and remove or uncheck the pattern for the folder.
+  2. Using Settings UI: `Cmd+,` to open Settings, search for "files exclude", look for the hidden folder pattern, and click the X to remove it.
+  3. Using Workspace Settings: Open `settings.json` in your project, look for `files.exclude` configuration, and remove the folder pattern.
+  4. Show All Files Temporarily: In the Explorer sidebar, click the "..." menu and look for filter options or "Show Excluded Files".
 
-## CODE REVIEW GUIDELINES
+### GitLens Launchpad
+- Common GitLens Launchpad issues and solutions:
+  1. Sign in to GitHub through GitLens: Open Command Palette (⇧⌘P), type "GitLens: Sign in to GitLens+", and authenticate with GitHub.
+  2. Check GitLens is enabled: Open Command Palette (⇧⌘P), type "GitLens: Show Launchpad", and if it doesn't appear, enable GitLens extension.
+  3. Refresh connection: Open Command Palette (⇧⌘P), type "GitLens: Reset Stored AI Key", and re-authenticate.
+  4. Check for pull requests/issues: Launchpad shows your assigned PRs, reviews, and issues. If you have none, the Launchpad may appear empty.
 
-## GIT RULES
+### Local History Extension
+- Local History should be disabled. If it's still generating `` folders:
+  1. Uninstall the extension: Open Extensions (⇧⌘X), search "Local History", and click "Uninstall".
+  2. Configure it properly:
+     - Disabled
+     - 0 days limit (no retention)
+     - 0 save delay (no auto-save)
+     - Path to `` if it does activate
+- If `` still regenerates, uninstall the extension entirely.
 
-*   All config dot files/folders (`.venv`, `.trunk`, `.vscode`, `.github`, `.specstory`, `.history`) should be gitignored.
-*   **.gitignore**: Add `.history` to keep it out of version control (it's local file history).
-*   **.gitignore**: Keep `.trunk` ignored (already covered by trunk-specific patterns, but should be explicit).
-*   Configuration folders (`.vscode`, `.trunk`, `.venv`, `.github`, `.specstory`, `.history`) must stay at the workspace root where tools expect them. Attempts to consolidate them into a single directory will break their expected paths. A viable workaround is to:
-1.  Keep folders in root
-2.  Use VS Code settings to hide them from view
-3.  Let tools regenerate what they need at root (but gitignore them)
-*   Don't format or debug gitignored dot files/folders. They're gitignored, tools auto-generate them as needed, and they're hidden from view via VS Code settings. Just let them exist and regenerate naturally.
+## CODING TOOLS
 
-## VS CODE SETTINGS
+### Linters
+- Trunk
+- markdownlint
+- black
+- ruff
+- bandit
+- isort
 
-*   To restore a hidden folder in VS Code:
+### VS Code Extensions
+- GitLens
+- markdownlint
 
-1.  Using Command Palette (⇧⌘P)
-*   Press `Cmd+Shift+P`
-*   Type "Files: Exclude"
-*   Select "Preferences: Open User Settings"
-*   Search for `files.exclude`
-*   Remove or uncheck the pattern for the folder you want to restore
-2.  Using Settings UI
-*   `Cmd+,` to open Settings
-*   Search for "files exclude"
-*   Look for the hidden folder pattern (e.g., `**/.venv` or `**/node_modules`)
-*   Click the X to remove it
-3.  Using Workspace Settings
-*   If the folder is hidden at workspace level:
-*   Open `settings.json` in your project
-*   Look for `files.exclude` configuration
-*   Remove the folder pattern
-4.  Show All Files Temporarily
-*   In the Explorer sidebar, click the "..." menu
-*   Look for filter options or "Show Excluded Files"
-*   Folders typically hidden by default:
+## BEST PRACTICES
 
-*   `.venv` or `venv/` (Python virtual environments)
-*   `node_modules/` (Node.js dependencies)
-*   `.git/` (Git repository)
-*   `__pycache__/`
-*   `.pytest_cache/`
-*   `.trunk/` (Trunk configuration)
-*   `.history/` (Local History extension)
-*   To hide folders from view in VS Code:
-
-1.  Keep folders in root
-2.  Use VS Code settings to hide them from view
-3.  Let tools regenerate what they need at root (but gitignore them)
-*   Local History Configuration:
-    *   `local-history.enabled` must be a number. Use `0` to disable the extension.
-    *   Set to Disabled
-    *   Set to 0 days limit (no retention)
-    *   Set to 0 save delay (no auto-save)
-    *   Path to `` if it does activate
+- All config dot files/folders (`.venv`, `.trunk`, `.vscode`, `.history`, `.github`, `.specstory`) should be gitignored, tools auto-generate them as needed, and they're hidden from view via VS Code settings. Just let them exist and regenerate naturally.
