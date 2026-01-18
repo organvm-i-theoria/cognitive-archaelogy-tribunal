@@ -25,6 +25,64 @@ from cognitive_tribunal.outputs.triage_report import TriageReportGenerator
 
 def main():
     """Main entry point for the CLI."""
+    # Check for empty state (no arguments) and display rich UI if available
+    if len(sys.argv) == 1:
+        try:
+            from rich.console import Console, Group
+            from rich.panel import Panel
+            from rich.markdown import Markdown
+            from rich.table import Table
+            from rich.align import Align
+            from rich import box
+            from rich.text import Text
+
+            console = Console()
+
+            # Title elements
+            title = Text("Cognitive Archaeology Tribunal", style="bold cyan underline")
+            subtitle = Text("Comprehensive Digital Archaeology & Triage Tool", style="italic white")
+
+            # Description
+            description = """
+A powerful tool to audit, organize, and triage your digital life.
+Analyze archives, AI conversations, GitHub repositories, and bookmarks to build a comprehensive inventory and knowledge graph.
+            """
+
+            # Examples Table
+            table = Table(box=box.SIMPLE, show_header=True, header_style="bold magenta", expand=True)
+            table.add_column("Task", style="cyan", ratio=1)
+            table.add_column("Command", style="green", ratio=2)
+
+            table.add_row("Run All Modules", "python main.py --all")
+            table.add_row("Scan Archives", "python main.py --scan-archives /path/to/files")
+            table.add_row("Analyze AI Chats", "python main.py --ai-conversations /path/to/export")
+            table.add_row("Audit Personal Repos", "python main.py --personal-repos username")
+            table.add_row("Audit Org Repos", "python main.py --org-repos orgname")
+
+            # Main Panel Content
+            content = [
+                Align(title, align="center"),
+                Align(subtitle, align="center"),
+                Text(""),  # Spacer
+                Markdown(description),
+                Text(""),  # Spacer
+                table,
+                Text("\nRun 'python main.py --help' for full documentation.", style="dim italic")
+            ]
+
+            console.print(Panel(
+                Group(*content),
+                title="👋 Welcome",
+                subtitle="v1.0.0",
+                border_style="blue",
+                padding=(1, 2)
+            ))
+            sys.exit(0)
+
+        except ImportError:
+            # Fallback to standard argparse behavior if rich is not installed
+            pass
+
     parser = argparse.ArgumentParser(
         description='Cognitive Archaeology Tribunal - Comprehensive digital archaeology tool',
         formatter_class=argparse.RawDescriptionHelpFormatter,
