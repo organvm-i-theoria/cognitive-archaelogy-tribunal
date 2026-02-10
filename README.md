@@ -1,94 +1,43 @@
+[![ORGAN-I: Theory](https://img.shields.io/badge/ORGAN--I-Theory-1a237e?style=flat-square)](https://github.com/organvm-i-theoria)
+
 # Cognitive Archaeology Tribunal
 
-Comprehensive archaeological dig tool for multi-layer cognitive ecosystem. Audits previous chaos: all disparate sources: archives, AI conversations, personal repos, and org repos. Generates complete inventory, knowledge graph, and triage recommendations to transform scattered creative history into organized system foundation.
+**Comprehensive archaeological dig tool for auditing, inventorying, and triaging a multi-layer cognitive ecosystem.**
 
-## 📚 Documentation
+## Purpose
 
-**New to this project?**
-- 📖 **[Documentation Hub](docs/)** - Setup guides, user guides, and analysis reports
-- 🎯 **[Quick Start](docs/guides/INTEGRATION_QUICK_START.md)** - Start integrating forks in 15 minutes
-- 📋 **[Integration Queue](context/planning/INTEGRATION_QUEUE.md)** - Track 42 fork integrations
-- 🔄 **[Current State](CONTEXTUAL_RELAY.md)** - Where we are and what's next
+Before a system can be organised, its full extent must be known. The Cognitive Archaeology Tribunal exists to answer a deceptively difficult question: *what do we actually have?* It scans every layer of a creator's digital footprint -- local archives (iCloud, Dropbox, network drives), AI conversation exports (ChatGPT and generic JSON), personal GitHub repositories, organisation repositories, and web bookmark collections -- and produces a unified inventory, a knowledge graph of relationships, and a prioritised triage report with migration recommendations.
 
-**For Researchers & Creatives:**
-- 🏛️ **[Public Archival Guide](docs/PUBLIC_ARCHIVAL_GUIDE.md)** - Publishing datasets for academic use
-- 🎨 **[Creative Abstractions](docs/CREATIVE_ABSTRACTIONS.md)** - Data art and creative applications
+This is the foundational audit tool for the eight-organ creative-institutional system. The ORGAN model assumes that ~44 repositories across 8 GitHub organisations can be coherently governed, but that assumption is only valid if the inventory is accurate. The Tribunal generates that inventory. It was originally built to transform scattered creative history -- years of disparate archives, abandoned repos, half-finished AI conversations, and unlabelled bookmark folders -- into a structured foundation from which the organ system could be designed.
 
-**Project Governance:**
-- 📋 **[Governance Framework](docs/GOVERNANCE.md)** - Metadata, licensing, consent, standards
-- 🗺️ **[Roadmap](ROADMAP.md)** - Development plan and agent handoff guide
-- 📊 **[System Analysis](docs/SYSTEM_ANALYSIS.md)** - Blindspots, shatterpoints, evolution opportunities
-- 🤝 **[Contributing](CONTRIBUTING.md)** - How to contribute code, datasets, or documentation
-- 📜 **[Code of Conduct](CODE_OF_CONDUCT.md)** - Community standards
+Within ORGAN-I (Theoria), this repo embodies *applied epistemology*: the practice of knowing what you know. Its five modules collectively answer the archaeological question, and its outputs feed directly into the planning documents in the [ingesting-organ-document-structure](https://github.com/organvm-i-theoria) corpus.
 
-**Quick Links:**
-- [Setup GitHub Token](docs/setup/GITHUB_TOKEN_SETUP.md)
-- [Complete Ingestion Plan](context/planning/INGESTION_PLAN.md)
-- [Ingestion Chambers](ingestion/README.md) - How to load your data
-- [Repository Cleanup Plan](REPO_CLEANUP_PLAN.md)
+## Modules
 
-## Features
-
-### 🗂️ Module 1: Archive Scanner
-- Scans iCloud, Dropbox, local drives, and network storage
-- Intelligent file classification by type and purpose
-- Advanced deduplication with hash-based detection
-- Calculates potential space savings
-- Identifies large, old, and unused files
-
-### 🤖 Module 2: AI Context Aggregator
-- Imports ChatGPT conversation exports
-- Supports generic JSON conversation formats
-- Extracts topics and conversation metadata
-- Search and filter capabilities
-- Timeline analysis of AI interactions
-
-### 👤 Module 3: Personal Repo Analyzer
-- Analyzes personal GitHub repositories
-- Classifies forks vs. original repositories
-- Tracks modifications in forked repos
-- Identifies inactive and unmodified forks
-- Activity and health metrics
-
-### 🏢 Module 4: Org Repo Analyzer
-- Analyzes organization repositories
-- Status tracking (active, stale, abandoned, archived)
-- Dependency detection and analysis
-- Health scoring and recommendations
-- Migration planning
-
-### 🌐 Module 5: Web Bookmark Analyzer
-- Parses bookmark export files (Netscape format)
-- Extracts URLs, titles, and creation dates
-- Provides statistics on bookmark collections
+| Module | Scope | Key Outputs |
+|--------|-------|-------------|
+| **Archive Scanner** | iCloud, Dropbox, local/network drives | File classification, deduplication, space-savings estimates |
+| **AI Context Aggregator** | ChatGPT exports, generic JSON conversations | Topic extraction, timeline analysis, search/filter |
+| **Personal Repo Analyzer** | Personal GitHub repos | Fork vs. original classification, modification tracking, health metrics |
+| **Org Repo Analyzer** | Organisation GitHub repos | Status tracking, dependency detection, migration planning |
+| **Web Bookmark Analyzer** | Netscape-format bookmark exports | URL/title/date extraction, collection statistics |
 
 ## Outputs
 
-The suite generates four comprehensive outputs:
-
-1. **Unified Inventory (JSON)** - Complete catalog of all discovered assets
-2. **Knowledge Graph** - Visual representation of relationships (JSON + Cytoscape format)
-3. **Triage Report** - Prioritized action items with recommendations
-4. **Migration Plans** - Strategic guidance for organization and cleanup
-
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/ivi374forivi/cognitive-archaelogy-tribunal.git
-cd cognitive-archaelogy-tribunal
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Set up GitHub token (optional but recommended)
-export GITHUB_TOKEN="your_github_token_here"
-```
+1. **Unified Inventory** (`inventory.json`) -- complete catalog of all discovered assets
+2. **Knowledge Graph** (`knowledge_graph.json` + Cytoscape format) -- relationship map across sources
+3. **Triage Report** (`triage_report.json` / `.txt`) -- prioritised action items and recommendations
+4. **Migration Plans** -- strategic guidance for reorganisation and cleanup
 
 ## Quick Start
 
-### Run All Modules
 ```bash
+git clone https://github.com/organvm-i-theoria/cognitive-archaelogy-tribunal.git
+cd cognitive-archaelogy-tribunal
+pip install -r requirements.txt
+export GITHUB_TOKEN="your_token_here"
+
+# Run all modules
 python main.py \
   --scan-archives /path/to/archives \
   --ai-conversations /path/to/chatgpt/export \
@@ -97,145 +46,16 @@ python main.py \
   --output-dir ./output
 ```
 
-### Archive Scanner Only
-```bash
-python main.py --scan-archives /path/to/archives --output-dir ./output
-```
+Individual modules can be run independently (e.g., `--personal-repos` only, `--scan-archives` only). See the full documentation in `docs/` for per-module usage, integration guides, and governance policies.
 
-### Personal Repos Only
-```bash
-python main.py --personal-repos your-username --output-dir ./output
-```
+## Status
 
-### Organization Repos Only
-```bash
-python main.py --org-repos your-org --output-dir ./output
-```
+**Stub / Active Development** -- Core modules are implemented in Python. The repository contains 184 files including documentation, configuration history (via SpecStory), Trunk-based linting configuration, and integration planning materials. The focus is shifting from personal archaeological use toward generalised audit tooling that other ORGAN repos can invoke.
 
-### AI Conversations Only
-```bash
-python main.py --ai-conversations /path/to/chatgpt/export --output-dir ./output
-```
+## Relationship to the Eight-Organ System
 
-### Web Bookmarks Only
-```bash
-python main.py --web-bookmarks /path/to/bookmarks.html --output-dir ./output
-```
+One of 18 repositories in [ORGAN-I: Theoria](https://github.com/organvm-i-theoria). The Tribunal's inventory outputs were the empirical basis for the organ-system design itself -- the repo audit in `00-d-organ-system-audit.md` and the `registry-v2.json` source of truth both trace their lineage to data this tool produced. It sits upstream of everything.
 
-## Usage Examples
+## Author
 
-### Multiple Archive Locations
-```bash
-python main.py --scan-archives "/path/to/iCloud,/path/to/Dropbox,/path/to/local" --output-dir ./output
-```
-
-### With Custom GitHub Token
-```bash
-python main.py --personal-repos username --github-token ghp_yourtoken --output-dir ./output
-```
-
-### Skip Specific Outputs
-```bash
-python main.py --personal-repos username --no-graph --no-triage --output-dir ./output
-```
-
-## Output Files
-
-After running, you'll find these files in your output directory:
-
-- `inventory.json` - Unified inventory of all assets
-- `knowledge_graph.json` - Knowledge graph data
-- `knowledge_graph_cytoscape.json` - Graph in Cytoscape.js format
-- `triage_report.json` - Structured triage recommendations
-- `triage_report.txt` - Human-readable triage report
-- `archives.json` - Detailed archive scan results
-- `ai_conversations.json` - AI conversation analysis
-- `personal_repos.json` - Personal repository analysis
-- `org_repos.json` - Organization repository analysis
-- `web_bookmarks.json` - Web bookmark analysis
-
-## Configuration
-
-Copy `config.example.yaml` to `config.yaml` and customize:
-
-```bash
-cp config.example.yaml config.yaml
-# Edit config.yaml with your settings
-```
-
-## API Usage
-
-You can also use the modules programmatically:
-
-```python
-from cognitive_tribunal import (
-    ArchiveScanner,
-    AIContextAggregator,
-    PersonalRepoAnalyzer,
-    OrgRepoAnalyzer
-)
-
-# Scan archives
-scanner = ArchiveScanner()
-results = scanner.scan_directory('/path/to/archives')
-
-# Analyze personal repos
-analyzer = PersonalRepoAnalyzer(github_token='your_token')
-repos = analyzer.analyze_user_repos('username')
-
-# Get triage recommendations
-triage = analyzer.generate_triage_report()
-```
-
-## Requirements
-
-- Python 3.8+
-- PyGithub (for GitHub API access)
-- Other dependencies listed in `requirements.txt`
-
-### Optional
-
-- GitHub Personal Access Token for API access (higher rate limits)
-- ChatGPT export data (for AI conversation analysis)
-
-## ChatGPT Export Instructions
-
-To export your ChatGPT conversations:
-
-1. Go to ChatGPT settings
-2. Navigate to "Data Controls"
-3. Click "Export data"
-4. Wait for the email with your data
-5. Extract the ZIP file
-6. Point the tool to the `conversations.json` file or directory
-
-## Architecture
-
-```
-cognitive_tribunal/
-├── modules/              # Core audit modules
-│   ├── archive_scanner.py
-│   ├── ai_context_aggregator.py
-│   ├── personal_repo_analyzer.py
- │   ├── org_repo_analyzer.py
- │   └── web_bookmark_analyzer.py
-├── outputs/              # Output generators
-│   ├── inventory.py
-│   ├── knowledge_graph.py
-│   └── triage_report.py
-└── utils/                # Shared utilities
-    ├── file_utils.py
-    └── github_utils.py
-```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Acknowledgments
-
-Built for comprehensive digital archaeology and cognitive ecosystem organization.
+**[@4444J99](https://github.com/4444J99)** / Part of [ORGAN-I: Theoria](https://github.com/organvm-i-theoria)
