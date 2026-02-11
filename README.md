@@ -410,7 +410,7 @@ The full roadmap is maintained in [ROADMAP.md](./ROADMAP.md).
 
 ### Within ORGAN-I (Theoria)
 
-- [recursive-engine](https://github.com/organvm-i-theoria/recursive-engine) — Recursive systems theory; the tribunal embodies recursive self-examination (it audits itself as part of its validation suite)
+- [recursive-engine--generative-entity](https://github.com/organvm-i-theoria/recursive-engine--generative-entity) — Recursive systems theory; the tribunal embodies recursive self-examination (it audits itself as part of its validation suite)
 - ingesting-organ-document-structure (planning corpus) — Planning corpus that consumes the tribunal's audit outputs as empirical foundation
 
 ### Across Organs
