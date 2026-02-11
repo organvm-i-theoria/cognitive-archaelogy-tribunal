@@ -2,6 +2,14 @@
 
 # Cognitive Archaeology Tribunal
 
+[![CI](https://github.com/organvm-i-theoria/cognitive-archaelogy-tribunal/actions/workflows/ci.yml/badge.svg)](https://github.com/organvm-i-theoria/cognitive-archaelogy-tribunal/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/badge/coverage-pending-lightgrey)](https://github.com/organvm-i-theoria/cognitive-archaelogy-tribunal)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/organvm-i-theoria/cognitive-archaelogy-tribunal/blob/main/LICENSE)
+[![Organ I](https://img.shields.io/badge/Organ-I%20Theoria-8B5CF6)](https://github.com/organvm-i-theoria)
+[![Status](https://img.shields.io/badge/status-active-brightgreen)](https://github.com/organvm-i-theoria/cognitive-archaelogy-tribunal)
+[![Python](https://img.shields.io/badge/lang-Python-informational)](https://github.com/organvm-i-theoria/cognitive-archaelogy-tribunal)
+
+
 **A systematic excavation engine that audits every layer of a creator's digital footprint — archives, AI conversations, personal repositories, organisation repositories, and web bookmarks — and produces a unified inventory, a knowledge graph of relationships, and a prioritised triage report that transforms scattered creative history into an organised system foundation.**
 
 ---
