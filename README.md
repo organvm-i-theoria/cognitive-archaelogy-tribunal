@@ -346,7 +346,7 @@ All output files are written to the `--output-dir` directory. The `output/` dire
 
 The Cognitive Archaeology Tribunal sits at the very top of the dependency chain within the eight-organ system. Its outputs were the empirical basis for the organ-system design itself:
 
-- **Registry Foundation:** The repo audit in `00-d-organ-system-audit.md` and the `registry-v2.json` source of truth in the [ingesting-organ-document-structure](https://github.com/organvm-i-theoria/ingesting-organ-document-structure) planning corpus both trace their lineage to data this tool produced.
+- **Registry Foundation:** The repo audit in `00-d-organ-system-audit.md` and the `registry-v2.json` source of truth in the ingesting-organ-document-structure (planning corpus) planning corpus both trace their lineage to data this tool produced.
 
 - **ORGAN-IV (Taxis) Orchestration:** The tribunal's triage reports feed directly into [agentic-titan](https://github.com/organvm-iv-taxis/agentic-titan), the orchestration layer that governs cross-organ routing and governance. Health scores, status classifications, and migration plans from `OrgRepoAnalyzer.generate_health_report()` provide the quantitative inputs that ORGAN-IV needs to make routing decisions.
 
@@ -403,7 +403,7 @@ The full roadmap is maintained in [ROADMAP.md](./ROADMAP.md).
 ### Within ORGAN-I (Theoria)
 
 - [recursive-engine](https://github.com/organvm-i-theoria/recursive-engine) — Recursive systems theory; the tribunal embodies recursive self-examination (it audits itself as part of its validation suite)
-- [ingesting-organ-document-structure](https://github.com/organvm-i-theoria/ingesting-organ-document-structure) — Planning corpus that consumes the tribunal's audit outputs as empirical foundation
+- ingesting-organ-document-structure (planning corpus) — Planning corpus that consumes the tribunal's audit outputs as empirical foundation
 
 ### Across Organs
 
