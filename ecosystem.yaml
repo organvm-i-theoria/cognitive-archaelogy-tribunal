@@ -1,0 +1,7 @@
+schema_version: '1.0'
+repo: cognitive-archaelogy-tribunal
+organ: I
+display_name: Audit tool for cognitive systems and organizational coherence
+delivery:
+- platform: web_app
+  status: not_started
