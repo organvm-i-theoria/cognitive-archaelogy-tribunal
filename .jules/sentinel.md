@@ -1,0 +1,4 @@
+## 2024-05-23 - Path Traversal Vulnerability in Archive Scanner
+**Vulnerability:** The `ArchiveScanner.scan_directory` method was vulnerable to path traversal/unrestricted directory access. It allowed users to scan the filesystem root (`/`) or critical system directories (e.g., `/proc`, `/sys`) without restriction, potentially leading to Denial of Service or Information Disclosure.
+**Learning:** `pathlib.Path.resolve()` canonicalizes paths (handling `..`) but does not inherently restrict access to sensitive system locations. Comparing `path == path.anchor` failed because `path.anchor` is a string while `path` is a Path object; explicit type conversion is required.
+**Prevention:** Implemented an `is_unsafe_path` method that explicitly checks against the filesystem root (using correct type comparison) and a blocklist of platform-specific system directories. This method is now called at the beginning of `scan_directory` to reject unsafe paths.
