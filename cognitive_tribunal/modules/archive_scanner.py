@@ -45,6 +45,42 @@ class ArchiveScanner:
             'errors': [],
         }
     
+    UNSAFE_PATHS_POSIX = {
+        '/proc', '/sys', '/dev', '/run', '/etc', '/boot', '/root', '/bin', '/sbin', '/usr', '/var'
+    }
+
+    UNSAFE_PATHS_NT = {
+        'C:\\Windows', 'C:\\Program Files', 'C:\\Program Files (x86)',
+    }
+
+    def is_unsafe_path(self, path: Path) -> bool:
+        """Check if the path is unsafe to scan (e.g. root or system directory)."""
+        resolved = path.resolve()
+
+        # Block root of the drive/filesystem
+        if str(resolved) == resolved.anchor:
+            return True
+
+        # Platform specific checks
+        if os.name == 'posix':
+            for unsafe in self.UNSAFE_PATHS_POSIX:
+                unsafe_path = Path(unsafe)
+                # Check if it is the unsafe path itself or a parent
+                if resolved == unsafe_path or unsafe_path in resolved.parents:
+                    return True
+
+        elif os.name == 'nt':
+            # Basic Windows safety checks
+            # Note: We can't easily rely on parents check for C:\Windows vs D:\Archive without
+            # knowing if we are on the same drive, but resolve handles paths.
+            # We compare string prefixes for Windows paths to be safer with case insensitivity
+            resolved_str = str(resolved).lower()
+            for unsafe in self.UNSAFE_PATHS_NT:
+                if resolved_str.startswith(unsafe.lower()):
+                    return True
+
+        return False
+
     def should_exclude(self, path: Path) -> bool:
         """Check if a path should be excluded."""
         path_str = str(path)
@@ -78,6 +114,9 @@ class ArchiveScanner:
         
         if not root.is_dir():
             return {'error': f"Path is not a directory: {root_path}"}
+
+        if self.is_unsafe_path(root):
+            return {'error': f"Security Risk: Path deemed unsafe to scan: {root}"}
         
         print(f"Scanning directory: {root}")
         self.scanned_files = []
