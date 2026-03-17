@@ -1,7 +1,23 @@
 schema_version: '1.0'
 repo: cognitive-archaelogy-tribunal
 organ: I
-display_name: Audit tool for cognitive systems and organizational coherence
+display_name: "Audit tool for cognitive systems and organizational coherence"
+
 delivery:
-- platform: web_app
+- platform: cli_tool
+  status: in_progress
+  priority: critical
+  notes: "Python CLI for auditing cognitive system coherence"
+  next_action: "Complete audit report generation and scoring"
+
+content:
+- platform: docs_site
   status: not_started
+  priority: high
+  notes: "Documentation for audit methodology and scoring rubric"
+  next_action: "Write audit criteria reference guide"
+- platform: academic_writing
+  status: planned
+  priority: medium
+  notes: "Paper on cognitive archaeology as an audit methodology"
+  next_action: "Draft outline on archaeological metaphor for system analysis"
