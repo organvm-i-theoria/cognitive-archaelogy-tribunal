@@ -1,0 +1,4 @@
+## 2024-03-24 - [Path Traversal in Archive Scanner]
+**Vulnerability:** The `ArchiveScanner` allowed scanning any directory provided by the user, including the filesystem root (`/`) or critical system directories (e.g., `/etc`, `/var`, `C:\Windows`). This could lead to sensitive information disclosure or Denial of Service (DoS) by scanning huge system volumes.
+**Learning:** Relying solely on `pathlib.Path.resolve()` checks for existence but does not validate the *sensitivity* or *appropriateness* of the path. User input for file system operations must always be validated against a blocklist or allowlist of safe paths.
+**Prevention:** Implemented an `is_unsafe_path` method that checks against a predefined list of platform-specific unsafe paths and detects root directory scanning using `path.anchor`. This validation is performed before any scanning operations begin.

@@ -19,6 +19,17 @@ class ArchiveScanner:
     Supports local file systems, network drives, and common cloud storage mounts.
     """
     
+    # Platform-specific unsafe paths
+    UNSAFE_PATHS_POSIX = {
+        '/', '/bin', '/boot', '/dev', '/etc', '/lib', '/lib64',
+        '/proc', '/root', '/run', '/sbin', '/sys', '/usr', '/var'
+    }
+
+    UNSAFE_PATHS_NT = {
+        'C:\\Windows', 'C:\\Program Files', 'C:\\Program Files (x86)',
+        'C:\\Users\\Default', 'C:\\System Volume Information'
+    }
+
     def __init__(self, exclude_patterns: Optional[List[str]] = None):
         """
         Initialize the archive scanner.
@@ -59,6 +70,33 @@ class ArchiveScanner:
         
         return False
     
+    def is_unsafe_path(self, path: Path) -> bool:
+        """
+        Check if the path is a sensitive system directory.
+
+        Args:
+            path: The path to check (should be resolved/absolute)
+
+        Returns:
+            True if the path is considered unsafe to scan
+        """
+        # Determine current platform unsafe paths
+        unsafe_paths = self.UNSAFE_PATHS_NT if os.name == 'nt' else self.UNSAFE_PATHS_POSIX
+
+        # Normalize path for comparison
+        path_str = str(path)
+
+        # Check for exact matches
+        if path_str in unsafe_paths:
+            return True
+
+        # Check for root directory scanning
+        # On POSIX, root is '/'. On NT, it's a drive root like 'C:\'
+        if len(path.parts) == 1 and path.anchor == str(path):
+            return True
+
+        return False
+
     def scan_directory(self, root_path: str, recursive: bool = True, max_depth: Optional[int] = None) -> Dict:
         """
         Scan a directory and classify all files.
@@ -79,6 +117,10 @@ class ArchiveScanner:
         if not root.is_dir():
             return {'error': f"Path is not a directory: {root_path}"}
         
+        # Security check: Prevent scanning system directories
+        if self.is_unsafe_path(root):
+            return {'error': f"Security risk: unsafe to scan system directory {root}"}
+
         print(f"Scanning directory: {root}")
         self.scanned_files = []
         self.deduplicator = Deduplicator()
