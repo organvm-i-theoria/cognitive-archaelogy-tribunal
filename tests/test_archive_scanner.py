@@ -4,6 +4,12 @@ Tests for Archive Scanner module.
 
 import tempfile
 from pathlib import Path
+import sys
+import os
+import pytest
+
+# Add project root to path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from cognitive_tribunal.modules.archive_scanner import ArchiveScanner
 
@@ -124,3 +130,50 @@ def test_duplicate_detection_within_single_location():
         assert dedup_stats['total_files'] == 3
         assert dedup_stats['duplicate_groups'] == 1
         assert dedup_stats['duplicate_files'] == 1  # 2 files - 1 = 1 duplicate
+
+
+def test_is_unsafe_path_root():
+    scanner = ArchiveScanner()
+    # Test root path
+    if os.name == 'posix':
+        assert scanner.is_unsafe_path(Path('/')) is True
+    elif os.name == 'nt':
+        assert scanner.is_unsafe_path(Path('C:\\')) is True
+
+
+def test_is_unsafe_path_system_dirs():
+    scanner = ArchiveScanner()
+
+    if os.name == 'posix':
+        unsafe_paths = ['/proc', '/sys', '/dev', '/etc', '/bin', '/usr']
+        for path in unsafe_paths:
+            assert scanner.is_unsafe_path(Path(path)) is True
+            # Subdirectories should also be unsafe
+            assert scanner.is_unsafe_path(Path(path) / 'subdir') is True
+
+    elif os.name == 'nt':
+        unsafe_paths = ['C:\\Windows', 'C:\\Program Files', 'C:\\Users']
+        for path in unsafe_paths:
+            # Note: We need to be careful with drive letters in tests if not running on Windows
+            # But the logic uses path.drive so it depends on the environment
+            pass
+
+
+def test_is_unsafe_path_safe_dirs(tmp_path):
+    scanner = ArchiveScanner()
+    # tmp_path is a safe directory provided by pytest
+    assert scanner.is_unsafe_path(tmp_path) is False
+
+    # Subdirectory in safe path
+    subdir = tmp_path / 'subdir'
+    subdir.mkdir()
+    assert scanner.is_unsafe_path(subdir) is False
+
+
+def test_scan_directory_unsafe():
+    scanner = ArchiveScanner()
+    # Should return error dictionary
+    if os.name == 'posix':
+        result = scanner.scan_directory('/')
+        assert 'error' in result
+        assert 'Security Risk' in result['error']
